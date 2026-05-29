@@ -1,27 +1,51 @@
+'use client';
+
 import { Button } from '@/shared/ui/primitives/button';
 import { Nav } from '@/shared/ui/react/design-system';
-
-import Image from 'next/image';
+import { GithubIcon } from '@/shared/ui/icons/brand-icons';
+import { motion } from 'motion/react';
 import Link from 'next/link';
 
-import type { User } from '@/payload-types';
+const navLinks = [
+  { label: 'About', href: '#about' },
+  { label: 'Experience', href: '#experience' },
+  { label: 'Skills', href: '#skills' },
+  { label: 'Contact', href: '#contact' },
+];
 
-export async function Header() {
+export function Header() {
   return (
-    <Nav
-      className="sticky top-0 border-b bg-accent/30 backdrop-blur-md"
-      containerClassName="flex justify-between items-center gap-4"
+    <motion.div
+      initial={{ y: -72, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      className="sticky top-0 z-50"
     >
-      <Link href="/" className="flex items-center gap-3">
-        <Image
-          src="/favicon.ico"
-          width={24}
-          height={24}
-          alt="Payload CMS Boilerplate"
-          className="invert dark:invert-0"
-        />
-        <h3 className="sm:text-lg">Payload CMS Boilerplate</h3>
-      </Link>
-    </Nav>
+      <Nav
+        className="border-b bg-background/80 backdrop-blur-md"
+        containerClassName="flex justify-between items-center gap-4"
+      >
+        <Link href="/" className="font-semibold tracking-tight">
+          Eray Günüuygun
+        </Link>
+        <div className="hidden items-center gap-6 sm:flex">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+        <Button asChild variant="outline" size="sm">
+          <Link href="https://github.com/Xjectro" target="_blank" rel="noopener noreferrer">
+            <GithubIcon />
+            GitHub
+          </Link>
+        </Button>
+      </Nav>
+    </motion.div>
   );
 }

@@ -10,7 +10,12 @@ const fontSans = FontSans({
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={fontSans.className} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={fontSans.className}
+      suppressHydrationWarning
+      style={{ scrollBehavior: 'smooth' }}
+    >
       <body className={cn('flex min-h-screen flex-col', fontSans.className)}>{children}</body>
     </html>
   );
