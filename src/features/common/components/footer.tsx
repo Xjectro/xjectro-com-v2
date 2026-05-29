@@ -1,0 +1,37 @@
+import { Section, Container } from '@/shared/ui/react/design-system';
+
+import Balancer from 'react-wrap-balancer';
+import Link from 'next/link';
+
+export function Footer() {
+  const rawUrl = process.env.NEXT_PUBLIC_URL ?? 'http://localhost:3000';
+  const siteUrl = new URL(rawUrl);
+  return (
+    <footer className="bottom-0 border-t bg-accent/30">
+      <Section>
+        <Container className="grid grid-cols-[1fr_auto] gap-6">
+          <div className="grid gap-6">
+            <Link href="/" className="space-y-6 text-lg">
+              <h3>Payload CMS Boilerplate</h3>
+            </Link>
+            <p className="text-muted-foreground">
+              <Balancer>
+                Open Source Payload CMS Boilerplate for creating applications with Next.js and
+                Payload CMS.
+              </Balancer>
+            </p>
+            <div className="mb-6 flex flex-col gap-4 text-sm text-muted-foreground underline underline-offset-4 md:mb-0 md:flex-row">
+              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="/terms-of-service">Terms of Service</Link>
+              <Link href="/cookie-policy">Cookie Policy</Link>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              © <Link href={siteUrl.href}>{siteUrl.hostname}</Link>. All rights reserved.
+              {new Date().getFullYear()}-present.
+            </p>
+          </div>
+        </Container>
+      </Section>
+    </footer>
+  );
+}
